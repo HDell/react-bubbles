@@ -41,7 +41,9 @@ const ColorList = ({ colors, updateColors }) => {
         e.preventDefault();
         axiosWithAuth().post('api/colors', colorToAdd)
             .then((res) => {
+                console.log(colorToAdd);
                 updateColors([...colors, colorToAdd]);
+                setColorToAdd(initialColor);
             })
             .catch((err) => {
                 console.log(err);
@@ -122,6 +124,7 @@ const ColorList = ({ colors, updateColors }) => {
                     onChange={e =>
                         setColorToAdd({
                             ...colorToAdd,
+                            id: colors.length+1,
                             color: e.target.value })
                     }
                     value={colorToAdd.color}
@@ -133,6 +136,7 @@ const ColorList = ({ colors, updateColors }) => {
                     onChange={e =>
                         setColorToAdd({
                             ...colorToAdd,
+                            id: colors.length+1,
                             code: { hex: e.target.value }
                         })
                     }
